@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:paddingHorizontal="10dp"
+        android:id="@+id/progressBarTime"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+    <TextView
+        android:id="@+id/textViewPoint"
+        android:textSize="25sp"
+        android:textColor="#f20"
+        android:text="1"
+        android:layout_marginStart="20dp"
+        android:layout_below="@id/progressBarTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_below="@id/progressBarTime"
+        android:layout_marginTop="30dp"
+        android:id="@+id/imgRandom"
+        android:scaleType="fitXY"
+        android:src="@drawable/bo"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+    <TextView
+        android:background="#FFEB3B"
+        android:textColor="#f20"
+        android:textAllCaps="true"
+        android:textSize="35sp"
+        android:gravity="center"
+        android:text="Chọn hình bên dưới"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/imgRandom"
+        android:id="@+id/textviewTieude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_below="@id/textviewTieude"
+        android:id="@+id/imgPick"
+        android:layout_marginTop="30dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/nophoto"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+</RelativeLayout>
