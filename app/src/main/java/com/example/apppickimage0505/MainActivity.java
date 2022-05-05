@@ -1,9 +1,15 @@
 package com.example.apppickimage0505;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Handle
         randomImage();
+
+
+        mImgPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,MainActivity2.class);
+                activityResultLauncher.launch(intent);
+            }
+        });
     }
 
     private void init()
@@ -71,4 +86,16 @@ public class MainActivity extends AppCompatActivity {
         mResourceIdRandom=getResources().getIdentifier(mArrNameImages[index],"drawable",getPackageName());
         mImgRandom.setImageResource(mResourceIdRandom);
     }
+
+    //get data from activity main 2
+    private ActivityResultLauncher<Intent> activityResultLauncher=registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+
+                }
+            }
+    );
+
 }
