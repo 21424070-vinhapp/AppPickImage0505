@@ -19,26 +19,37 @@ public class MainActivity extends AppCompatActivity {
     int mResourceIdRandom;
     Random mRandom;
     MyCountDownTimer mMyCountDownTimer;
+    long totalTime=5000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         init();
-        randomImage();
-        //Test
+        event();
+
+    }
+
+    private void event() {
+
+        //Listener
         mMyCountDownTimer.getInstance().countDown(5000, 1000, new MyCountDownTimer.OnListenerMyCountDownTimer() {
             @Override
             public void onTick(long currentTime) {
-                Toast.makeText(MainActivity.this, currentTime+"", Toast.LENGTH_SHORT).show();
+                mProgressBar.setProgress((int) currentTime);
+                //Toast.makeText(MainActivity.this, currentTime+"", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFinish() {
+                mProgressBar.setProgress(0);
                 //Log.d("BBB","on finish");
-                Toast.makeText(MainActivity.this, "onFinish", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "onFinish", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Handle
+        randomImage();
     }
 
     private void init()
@@ -48,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         mTxtPoint=findViewById(R.id.textViewPoint);
         mImgRandom=findViewById(R.id.imgRandom);
         mImgPick=findViewById(R.id.imgPick);
+
+        mProgressBar.setMax((int) totalTime);
+        mProgressBar.setProgress((int) totalTime);
     }
 
     private void randomImage()
