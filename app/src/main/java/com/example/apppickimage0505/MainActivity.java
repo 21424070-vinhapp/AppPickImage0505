@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mMyCountDownTimer.getInstance().countDown(5000, 1000, new MyCountDownTimer.OnListenerMyCountDownTimer() {
             @Override
             public void onTick(long currentTime) {
-                mProgressBar.setProgress((int) currentTime);
+                mProgressBar.setProgress((int) currentTime/1000);
                 //Toast.makeText(MainActivity.this, currentTime+"", Toast.LENGTH_SHORT).show();
             }
 
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         mImgRandom=findViewById(R.id.imgRandom);
         mImgPick=findViewById(R.id.imgPick);
 
-        mProgressBar.setMax((int) totalTime);
-        mProgressBar.setProgress((int) totalTime);
+        mProgressBar.setMax((int) totalTime/1000);
+        mProgressBar.setProgress((int) totalTime/1000);
     }
 
     private void randomImage()
