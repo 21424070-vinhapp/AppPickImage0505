@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,7 +94,12 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-
+                    if(result.getResultCode()== Activity.RESULT_OK)
+                    {
+                        Intent intent=result.getData();
+                        int resourcePick=intent.getIntExtra("resourceID",-1);
+                        mImgPick.setImageResource(resourcePick);
+                    }
                 }
             }
     );
