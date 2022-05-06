@@ -7,6 +7,10 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import java.text.CollationElementIterator;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class MainActivity2 extends AppCompatActivity {
 
     TableLayout mTableLayout;
@@ -22,6 +26,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         mArrNameImages=getResources().getStringArray(R.array.arr_image);
 
+        Collections.shuffle(Arrays.asList(mArrNameImages));
 
         //so dong: 6
         //so cot: 3
