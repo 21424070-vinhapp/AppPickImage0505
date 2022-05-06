@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Random mRandom;
     MyCountDownTimer mMyCountDownTimer;
     long totalTime=5000;
+    int mPoint=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
         mTxtPoint=findViewById(R.id.textViewPoint);
         mImgRandom=findViewById(R.id.imgRandom);
         mImgPick=findViewById(R.id.imgPick);
-
+        //set point
+        mTxtPoint.setText(mPoint+"");
+        //set max progressbar
         mProgressBar.setMax((int) totalTime/1000);
         mProgressBar.setProgress((int) totalTime/1000);
     }
@@ -99,6 +103,24 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent=result.getData();
                         int resourcePick=intent.getIntExtra("resourceID",-1);
                         mImgPick.setImageResource(resourcePick);
+
+                        if(resourcePick==mResourceIdRandom)
+                        {
+                            mPoint+=1;
+                            mTxtPoint.setText(mPoint+"");
+                            //neu diem tang len thi se chuyen sang hinh tiep theo
+                            Toast.makeText(MainActivity.this, "Chuan bi cho hinh tiep theo", Toast.LENGTH_SHORT).show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    randomImage();
+                                }
+                            },1500);
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
             }
