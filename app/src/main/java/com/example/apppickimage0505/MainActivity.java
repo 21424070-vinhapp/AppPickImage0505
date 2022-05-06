@@ -114,13 +114,22 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     randomImage();
+                                    event();
                                 }
                             },1500);
                         }
                         else
                         {
-
+                            mProgressBar.setMax(0);
+                            //mProgressBar.setProgress(0);
+                            mTxtPoint.setText(0+"");
+                            mImgPick.setImageResource(R.drawable.nophoto);
+                            Toast.makeText(MainActivity.this, "Diem cua ban la: "+mPoint+" diem", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "BAN CHUA CHON HINH", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
