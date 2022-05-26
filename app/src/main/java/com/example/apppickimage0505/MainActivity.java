@@ -17,12 +17,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apppickimage0505.databinding.ActivityMainBinding;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    ProgressBar mProgressBar;
-    TextView mTxtPoint;
-    ImageView mImgRandom,mImgPick;
+    ActivityMainBinding mainBinding;
     String[] mArrNameImages;
     int mResourceIdRandom;
     Random mRandom;
@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         mMyCountDownTimer.getInstance().countDown(5000, 1000, new MyCountDownTimer.OnListenerMyCountDownTimer() {
             @Override
             public void onTick(long currentTime) {
-                mProgressBar.setProgress((int) currentTime/1000);
+                mainBinding.progressBarTime.setProgress((int) currentTime/1000);
                 //Toast.makeText(MainActivity.this, currentTime+"", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFinish() {
-                mProgressBar.setProgress(0);
+                mainBinding.progressBarTime.setProgress(0);
                 //Log.d("BBB","on finish");
                 //Toast.makeText(MainActivity.this, "onFinish", Toast.LENGTH_SHORT).show();
             }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         randomImage();
 
 
-        mImgPick.setOnClickListener(new View.OnClickListener() {
+        mainBinding.imgPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,MainActivity2.class);
@@ -73,15 +73,13 @@ public class MainActivity extends AppCompatActivity {
     private void init()
     {
         mRandom=new Random();
-        mProgressBar=findViewById(R.id.progressBarTime);
-        mTxtPoint=findViewById(R.id.textViewPoint);
-        mImgRandom=findViewById(R.id.imgRandom);
-        mImgPick=findViewById(R.id.imgPick);
+        mainBinding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mainBinding.getRoot());
         //set point
-        mTxtPoint.setText(mPoint+"");
+        mainBinding.textViewPoint.setText(mPoint+"");
         //set max progressbar
-        mProgressBar.setMax((int) totalTime/1000);
-        mProgressBar.setProgress((int) totalTime/1000);
+        mainBinding.progressBarTime.setMax((int) totalTime/1000);
+        mainBinding.progressBarTime.setProgress((int) totalTime/1000);
     }
 
     private void randomImage()
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         mArrNameImages=getResources().getStringArray(R.array.arr_image);
         int index=mRandom.nextInt(mArrNameImages.length);
         mResourceIdRandom=getResources().getIdentifier(mArrNameImages[index],"drawable",getPackageName());
-        mImgRandom.setImageResource(mResourceIdRandom);
+        mainBinding.imgRandom.setImageResource(mResourceIdRandom);
     }
 
     //get data from activity main 2
@@ -102,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent intent=result.getData();
                         int resourcePick=intent.getIntExtra("resourceID",-1);
-                        mImgPick.setImageResource(resourcePick);
+                        mainBinding.imgPick.setImageResource(resourcePick);
 
                         if(resourcePick==mResourceIdRandom)
                         {
                             mPoint+=1;
-                            mTxtPoint.setText(mPoint+"");
+                            mainBinding.textViewPoint.setText(mPoint+"");
                             //neu diem tang len thi se chuyen sang hinh tiep theo
                             Toast.makeText(MainActivity.this, "Chuan bi cho hinh tiep theo", Toast.LENGTH_SHORT).show();
                             new Handler().postDelayed(new Runnable() {
@@ -120,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            mProgressBar.setMax(0);
+                            mainBinding.progressBarTime.setMax(0);
                             //mProgressBar.setProgress(0);
-                            mTxtPoint.setText(0+"");
-                            mImgPick.setImageResource(R.drawable.nophoto);
+                            mainBinding.textViewPoint.setText(0+"");
+                            mainBinding.imgPick.setImageResource(R.drawable.nophoto);
                             Toast.makeText(MainActivity.this, "Diem cua ban la: "+mPoint+" diem", Toast.LENGTH_SHORT).show();
                         }
                     }
